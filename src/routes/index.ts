@@ -3,7 +3,7 @@ import { ITrade, Ticker } from "../types";
 import Decimal from "decimal.js";
 
 export async function setupRoutes(app) {
-  app.post("/trade", validateTrade, (req, res) => {
+  app.post("api/trade", validateTrade, (req, res) => {
     try {
       const { ticker, side, qty, price } = req.body as any;
       const trade: ITrade = { ticker, side, qty, price, timestamp: +new Date() };
@@ -16,7 +16,7 @@ export async function setupRoutes(app) {
     }
   });
 
-  app.get("/portfolio", (req, res) => {
+  app.get("api/portfolio", (req, res) => {
     try {
       const portfolio = positionsManager.getPortfolio();
       res.json(portfolio);
@@ -27,7 +27,7 @@ export async function setupRoutes(app) {
     }
   });
 
-  app.get("/pnl", (req, res) => {
+  app.get("api/pnl", (req, res) => {
     try {
       const pnl = positionsManager.getPnL();
       res.json(pnl);
